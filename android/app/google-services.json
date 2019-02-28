@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "436927429564",
+    "firebase_url": "https://tezoro-bba6b.firebaseio.com",
+    "project_id": "tezoro-bba6b",
+    "storage_bucket": "tezoro-bba6b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:436927429564:android:3db2f4e8eb3977d0",
+        "android_client_info": {
+          "package_name": "com.tezoroco.tezoroapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "436927429564-j5tu2p1bd78kbvr6e1aem51og97kv28s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBX3aKjHJVbzc6JiYHgqriR5vQthLAeboI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

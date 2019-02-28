@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:camera/camera.dart';
+import 'dart:async';
 
-void main() => runApp(MyApp());
+
+
+List<CameraDescription> cameras;
+
+Future<void> main() async {
+  cameras = await availableCameras();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -18,20 +27,43 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class TakePicturePage extends StatelessWidget {
-  
+class TakePicturePage extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: AppBar(
-        title: Text("Take a Picture"),
-      ),
-      body: Center(
-        child: Text("This will show the camera!"),
-      ),
-    );
+  _TakePicturePageState createState() => _TakePicturePageState();
+  
+}
+
+class _TakePicturePageState extends State<TakePicturePage> {
+  CameraController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = CameraController(cameras[0], ResolutionPreset.medium);
+    controller.initialize().then((_) {
+      if (!mounted) {
+        return;
+      }
+      setState(() {});
+    });
   }
 
+  @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (!controller.value.isInitialized) {
+      return Container();
+    }
+    return AspectRatio(
+      aspectRatio: controller.value.aspectRatio,
+      child: CameraPreview(controller)
+    );
+  }
 }
 
 class MyHomePage extends StatefulWidget {
