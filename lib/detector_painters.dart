@@ -151,6 +151,26 @@ class TextDetectorPainter extends CustomPainter {
       paint.color = Colors.red;
       canvas.drawRect(_getRect(block), paint);
     }
+
+    final ui.ParagraphBuilder builder = ui.ParagraphBuilder(
+      ui.ParagraphStyle(
+          textAlign: TextAlign.left,
+          fontSize: 23.0,
+          textDirection: TextDirection.ltr),
+    );
+
+    builder.pushStyle(ui.TextStyle(color: Colors.green));
+    String text = visionText.text;
+    builder.addText('UID: $text');
+    builder.pop();
+
+    canvas.drawParagraph(
+      builder.build()
+        ..layout(ui.ParagraphConstraints(
+          width: size.width,
+        )),
+      const Offset(0.0, 0.0),
+    );
   }
 
   @override
