@@ -25,8 +25,22 @@ class MyApp extends StatelessWidget {
       home: MyHomePage(title: 'Tezoro'),
       routes: {
         '/SecondScreen': (context) => TakePicturePage(),
+        '/ThirdScreen': (context) => TakePicturePageLite(),
       },
     );
+  }
+}
+
+class TakePicturePageLite extends StatefulWidget {
+  @override
+  _TakePicturePageLiteState createState() => _TakePicturePageLiteState();
+}
+
+class _TakePicturePageLiteState extends State<TakePicturePageLite> {
+  
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }
 
@@ -213,8 +227,14 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {
                 Navigator.pushNamed(context, '/SecondScreen');
                 },
-              child: const Text("Take a Picture!")
-            )
+              child: const Text("Test Text ML")
+            ),
+            RaisedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/ThirdScreen');
+                },
+              child: const Text("Test Picture ML")
+            ),
           ],
         ),
       ),
