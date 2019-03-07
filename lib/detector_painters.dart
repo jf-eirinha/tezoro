@@ -132,8 +132,8 @@ class TextDetectorPainter extends CustomPainter {
         rect: container.boundingBox,
         imageSize: imageSize,
         widgetSize: size,
-        shouldFlipY: defaultTargetPlatform != TargetPlatform.iOS,
-        shouldFlipX: defaultTargetPlatform != TargetPlatform.iOS,
+        shouldFlipY: false,
+        shouldFlipX: false,
       );
     }
 

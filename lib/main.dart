@@ -108,7 +108,7 @@ class _TakePicturePageState extends State<TakePicturePage> {
       constraints: const BoxConstraints.expand(),
       child: _camera == null
           ? const Center(
-            child: Text('Initizalizing Camera...',
+            child: Text('Initializing Camera...',
             style: TextStyle(
               color: Colors.green,
               fontSize: 30.0,

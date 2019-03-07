@@ -25,7 +25,7 @@ FirebaseVisionImageMetadata buildMetaData(CameraImage image) =>
     FirebaseVisionImageMetadata(
       rawFormat: image.format.raw,
       size: Size(image.width.toDouble(), image.height.toDouble()),
-      rotation: ImageRotation.rotation270,
+      rotation: ImageRotation.rotation90,
       planeData: image.planes.map(
         (Plane plane) {
           return FirebaseVisionImagePlaneMetadata(
