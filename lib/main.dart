@@ -6,6 +6,8 @@ import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 
 import 'detector_painters.dart';
 import 'utils.dart';
+//import 'package:tflite/tflite.dart';
+//import 'package:flutter/services.dart';
 
 List<CameraDescription> cameras;
 
@@ -25,24 +27,133 @@ class MyApp extends StatelessWidget {
       home: MyHomePage(title: 'Tezoro'),
       routes: {
         '/SecondScreen': (context) => TakePicturePage(),
-        '/ThirdScreen': (context) => TakePicturePageLite(),
+//        '/ThirdScreen': (context) => TakePicturePageLite(),
       },
     );
   }
 }
 
-class TakePicturePageLite extends StatefulWidget {
-  @override
-  _TakePicturePageLiteState createState() => _TakePicturePageLiteState();
-}
+// class TakePicturePageLite extends StatefulWidget {
+//   @override
+//   _TakePicturePageLiteState createState() => _TakePicturePageLiteState();
+// }
 
-class _TakePicturePageLiteState extends State<TakePicturePageLite> {
+// class _TakePicturePageLiteState extends State<TakePicturePageLite> {
   
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
+//   dynamic _scanResults;
+//   CameraController _camera;
+
+//   bool _isDetecting = false;
+//   CameraLensDirection _direction = CameraLensDirection.back;
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     _initializeCamera();
+//   }
+
+//   Future loadModel() async {
+//     try {
+//       String res = await Tflite.loadModel(
+//         model: "assets/mobilenet_v1_1.0_224.tflite",
+//         labels: "assets/mobilenet_v1_1.0_224.txt",
+//       );
+//       print(res);
+//     } on PlatformException {
+//       print('Failed to load model.');
+//     }
+//   }
+
+//   Future recognizeImage(image) async {
+//     var result = await Tflite.runModelOnFrame(
+//       bytesList: image.planes.map((plane) {return plane.bytes;}).toList(),// required
+//       imageHeight: image.height,
+//       imageWidth: image.width,
+//       imageMean: 127.5,   // defaults to 127.5
+//       imageStd: 127.5,    // defaults to 127.5
+//       rotation: 90,       // defaults to 90, Android only
+//       numResults: 2,      // defaults to 5
+//       threshold: 0.1,     // defaults to 0.1
+//     );
+//     _isDetecting = false;
+//     setState(() {
+//       _scanResults = result;
+//     });
+//   }
+
+//   void _initializeCamera() async {
+//     _camera = CameraController(
+//       await getCamera(_direction),
+//       defaultTargetPlatform == TargetPlatform.iOS
+//         ? ResolutionPreset.low
+//         : ResolutionPreset.medium,
+//     );
+//     await _camera.initialize();
+
+//     _camera.startImageStream((CameraImage image) {
+//       if (_isDetecting) return;
+
+//       _isDetecting = true;
+//       recognizeImage(image);
+//     });
+//   }
+
+//   Widget _buildResults() {
+//     const Text noResultsText =  const Text('No results!');
+
+//     if(_scanResults == null || 
+//     _camera == null ||
+//     !_camera.value.isInitialized) {
+//       return noResultsText;
+//     }
+
+//     CustomPainter painter;
+
+//     final Size imageSize = Size(
+//       _camera.value.previewSize.height,
+//       _camera.value.previewSize.width,
+//     );
+
+//      painter = LabelDetectorPainter(imageSize, _scanResults);
+
+//      return CustomPaint(
+//        painter: painter,
+//       );
+//   }
+
+//   Widget  _buildImage() {
+//     return Container(
+//       constraints: const BoxConstraints.expand(),
+//       child: _camera == null
+//           ? const Center(
+//             child: Text('Initializing Camera...',
+//             style: TextStyle(
+//               color: Colors.green,
+//               fontSize: 30.0,
+//             ),
+//           )
+//         )
+//         : Stack(
+//             fit: StackFit.expand,
+//             children: <Widget>[
+//               CameraPreview(_camera),
+//               _buildResults(),
+//             ],
+//           )
+//     );
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: const Text('Package Classifier Lite'),
+//       ),
+//       body: _buildImage(),
+//     );
+//   }
+
+// }
 
 class TakePicturePage extends StatefulWidget {
   @override

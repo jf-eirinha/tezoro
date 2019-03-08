@@ -21,6 +21,7 @@ dependencies:
     sdk: flutter
   firebase_ml_vision: ^0.6.0+2
   camera: ^0.4.2
+#  tflite:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -30,6 +31,9 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+assets:
+#   - assets/labels.txt
+#   - assets/test_model.tflite
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
