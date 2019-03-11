@@ -8,6 +8,10 @@ import 'detector_painters.dart';
 import 'utils.dart';
 //import 'package:tflite/tflite.dart';
 //import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 
 List<CameraDescription> cameras;
 
@@ -27,10 +31,69 @@ class MyApp extends StatelessWidget {
       home: MyHomePage(title: 'Tezoro'),
       routes: {
         '/SecondScreen': (context) => TakePicturePage(),
+        '/FourthScreen': (context) => APIPage(),
 //        '/ThirdScreen': (context) => TakePicturePageLite(),
       },
     );
   }
+}
+
+class APIPage extends StatefulWidget {
+  @override
+  _APIPageState createState() => _APIPageState();
+  
+}
+
+class _APIPageState extends State<APIPage> {
+  
+  Future<String> getData() async {
+
+    File _image;
+
+    Future getImage() async {
+      var image = await ImagePicker.pickImage(source: ImageSource.camera);
+      setState(() {
+        _image = image;
+        });
+    }
+
+    getImage();
+    List<int> imageBytes = _image.readAsBytesSync();
+    String base64Image = base64Encode(imageBytes);
+
+    Map jsonRequest = {
+      "payload": {
+        "image": {
+          "imageBytes": base64Image
+          }
+        }
+    };
+    String body = json.encode(jsonRequest);
+
+    var response = await http.post(
+      Uri.encodeFull(' https://automl.googleapis.com/v1beta1/projects/tezoro-bba6b/locations/us-central1/models/ICN2401483474436740584:predict'),
+      headers: {
+        "Content-Type": "application/json"
+        "Authorization: Bearer ya29.GlvHBkWCONE-1620NYpvoiL68ecyZOjK2TaU9cOARkW3sAOumv_4Mr2EC8q9yflFhTTrViowvSsaMUydAeacZoqbXpgNPBuDBkCX9_5nw4FZIrefTTyIkVmazNoi"
+      },
+      body: body
+    );
+
+    Map data = json.decode(response.body);
+    print(data);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      body: new Center(
+        child: new RaisedButton(
+          child: new Text("Get Data!"),
+          onPressed: getData,
+        ),
+      ),
+    );
+  }  
 }
 
 // class TakePicturePageLite extends StatefulWidget {
@@ -345,6 +408,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.pushNamed(context, '/ThirdScreen');
                 },
               child: const Text("Test Picture ML")
+            ),
+            RaisedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/FourthScreen');
+                },
+              child: const Text("REST API")
             ),
           ],
         ),
