@@ -23,7 +23,7 @@ dependencies:
   camera: ^0.4.2
   http:
   image_picker:
-#  tflite:
+  tflite:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -34,8 +34,8 @@ dev_dependencies:
     sdk: flutter
 
 assets:
-#   - assets/labels.txt
-#   - assets/test_model.tflite
+   - assets/mobilenet_v1_1.0_224.txt
+   - assets/mobilenet_v1_1.0_224.tflite
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
