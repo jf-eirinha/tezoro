@@ -5,14 +5,12 @@ import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'detector_painters.dart';
 import 'utils.dart';
 
-
-class TakePicturePage extends StatefulWidget {
+class TextDetector extends StatefulWidget {
   @override
-  _TakePicturePageState createState() => _TakePicturePageState();
-  
+  _TextDetectorState createState() => _TextDetectorState();
 }
 
-class _TakePicturePageState extends State<TakePicturePage> {
+class _TextDetectorState extends State<TextDetector> {
   
   dynamic _scanResults;
   CameraController _camera;
@@ -106,7 +104,7 @@ class _TakePicturePageState extends State<TakePicturePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Package Classifier'),
+        title: const Text('ML Kit Vision - OCR'),
       ),
       body: _buildImage(),
     );

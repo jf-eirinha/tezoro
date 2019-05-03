@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'dart:async';
 import 'package:flutter/foundation.dart';
-import 'detector_painters.dart';
 import 'utils.dart';
 import 'package:tflite/tflite.dart';
+import 'detector_painters.dart';
 
 class TakePicturePageLite extends StatefulWidget {
   @override
@@ -24,17 +24,11 @@ class _TakePicturePageLiteState extends State<TakePicturePageLite> {
     super.initState();
   }
 
-  @override
-  void dispose() {
-    Tflite.close();
-    super.dispose();
-  }
-
   Future loadModel() async {
     try {
-      final res = await Tflite.loadModel(
+      String res = await Tflite.loadModel(
         model: "assets/mobilenet_v1_1.0_224.tflite",
-        labels: "assets/mobilenet_v1_1.0_224.txt",
+        labels: "assets/labels.txt",
       );
       print(res);
     } catch(e) {
@@ -72,8 +66,6 @@ class _TakePicturePageLiteState extends State<TakePicturePageLite> {
 
     _camera.startImageStream((CameraImage image) {
       if (_isDetecting) return;
-
-      print('I am up in here initializing cameras!!!!');
 
       _isDetecting = true;
       recognizeImage(image).then(
@@ -146,7 +138,7 @@ class _TakePicturePageLiteState extends State<TakePicturePageLite> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Package Classifier Lite'),
+        title: const Text('TensorFlow Lite for Flutter'),
       ),
       body: _buildImage(),
     );

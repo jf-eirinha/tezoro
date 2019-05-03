@@ -34,7 +34,7 @@ dev_dependencies:
     sdk: flutter
 
 assets:
-   - assets/mobilenet_v1_1.0_224.txt
+   - assets/labels.txt
    - assets/mobilenet_v1_1.0_224.tflite
 
 # For information on the generic Dart part of this file, see the

@@ -3,7 +3,6 @@ import 'package:camera/camera.dart';
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'ocr_vision_screen.dart';
-import 'automl_screen.dart';
 import 'tflite_screen.dart';
 
 List<CameraDescription> cameras;
@@ -17,14 +16,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Tezoro App',
+      title: 'ML Kit Vision OCR for Flutter',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Tezoro'),
+      home: MyHomePage(title: 'TensorFlow Lite for Flutter'),
       routes: {
-        '/SecondScreen': (context) => TakePicturePage(),
-        '/FourthScreen': (context) => APIPage(),
+        '/SecondScreen': (context) => TextDetector(),
         '/ThirdScreen': (context) => TakePicturePageLite(),
       },
     );
@@ -56,19 +54,13 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {
                 Navigator.pushNamed(context, '/SecondScreen');
                 },
-              child: const Text("Test Text ML")
+              child: const Text("ML Kit Vision OCR for Flutter")
             ),
             RaisedButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/ThirdScreen');
                 },
-              child: const Text("Test Picture ML")
-            ),
-            RaisedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/FourthScreen');
-                },
-              child: const Text("REST API")
+              child: const Text("TensorFlow Lite for Flutter")
             ),
           ],
         ),

@@ -1,80 +1,7 @@
-// Copyright 2018 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
 import 'dart:ui' as ui;
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
-enum Detector { barcode, face, label, cloudLabel, text }
-
-class BarcodeDetectorPainter extends CustomPainter {
-  BarcodeDetectorPainter(this.imageSize, this.barcodes);
-
-  final Size imageSize;
-  final List<Barcode> barcodes;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final Paint paint = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 2.0;
-
-    for (Barcode barcode in barcodes) {
-      paint.color = Colors.green;
-      canvas.drawRect(
-        _scaleAndFlipRectangle(
-          rect: barcode.boundingBox,
-          imageSize: imageSize,
-          widgetSize: size,
-          shouldFlipX: defaultTargetPlatform != TargetPlatform.iOS,
-          shouldFlipY: defaultTargetPlatform != TargetPlatform.iOS,
-        ),
-        paint,
-      );
-    }
-  }
-
-  @override
-  bool shouldRepaint(BarcodeDetectorPainter oldDelegate) {
-    return oldDelegate.imageSize != imageSize ||
-        oldDelegate.barcodes != barcodes;
-  }
-}
-
-class FaceDetectorPainter extends CustomPainter {
-  FaceDetectorPainter(this.imageSize, this.faces);
-
-  final Size imageSize;
-  final List<Face> faces;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final Paint paint = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 2.0
-      ..color = Colors.red;
-
-    for (Face face in faces) {
-      canvas.drawRect(
-        _scaleAndFlipRectangle(
-          rect: face.boundingBox,
-          imageSize: imageSize,
-          widgetSize: size,
-          shouldFlipY: false,
-          shouldFlipX: defaultTargetPlatform != TargetPlatform.iOS,
-        ),
-        paint,
-      );
-    }
-  }
-
-  @override
-  bool shouldRepaint(FaceDetectorPainter oldDelegate) {
-    return oldDelegate.imageSize != imageSize || oldDelegate.faces != faces;
-  }
-}
 
 class LabelDetectorPainter extends CustomPainter {
   LabelDetectorPainter(this.imageSize, this.labels);
@@ -153,14 +80,14 @@ class TextDetectorPainter extends CustomPainter {
 
     final ui.ParagraphBuilder builder = ui.ParagraphBuilder(
       ui.ParagraphStyle(
-          textAlign: TextAlign.left,
-          fontSize: 23.0,
+          textAlign: TextAlign.center,
+          fontSize: 36.0,
           textDirection: TextDirection.ltr),
     );
 
-    builder.pushStyle(ui.TextStyle(color: Colors.green));
+    builder.pushStyle(ui.TextStyle(color: Colors.white));
     String text = visionText.text;
-    builder.addText('UID: $text');
+    builder.addText(text);
     builder.pop();
 
     canvas.drawParagraph(
